@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>러너 믹스 칵테일</title>
+  <meta name="description" content="러너를 위한 스포티 믹스 칵테일 포스터" />
+  <style>
+    :root{
+      --bg:#0b0f1a; --fg:#f6f7fb; --muted:#a7adbd; --card:#151a2e;
+      --accent:#21d4fd; --lime:#9aff6b; --red:#ff6b6b;
+      --radius:20px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Apple SD Gothic Neo,Noto Sans KR,Helvetica,Arial,sans-serif;
+      background:linear-gradient(160deg,#0b0f1a 0%, #16203a 100%);
+      color:var(--fg); line-height:1.35;
+    }
+    .wrap{max-width:760px; margin:0 auto; padding:24px 16px 120px;}
+    header{text-align:center;}
+    .badge{font-size:12px; color:#0b1022; background:linear-gradient(90deg,var(--accent),#a1ffce); padding:6px 12px; border-radius:999px; font-weight:700; letter-spacing:.2px}
+    h1{font-size:28px; margin:12px 0 4px}
+    .sub{color:var(--muted); font-size:14px;}
+
+    .grid{display:grid; grid-template-columns:1fr; gap:14px; margin-top:22px}
+    @media(min-width:560px){.grid{grid-template-columns:repeat(2,1fr)}}
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:var(--radius);
+      padding:16px; text-align:center;
+      box-shadow:0 6px 20px rgba(0,0,0,.25);
+    }
+    .card h3{margin:0; font-size:22px; font-weight:800}
+    .tag{margin:10px 0; font-size:14px; font-weight:600; color:var(--fg)}
+    .ing{margin:8px 0 14px; color:var(--muted); font-size:14px}
+    .btn{
+      appearance:none; border:0; border-radius:14px; padding:12px 14px; font-weight:700; font-size:14px; cursor:pointer;
+      color:#0b1022; background:#fff; box-shadow:0 6px 14px rgba(0,0,0,.15);
+    }
+
+    .poster{
+      position:fixed; inset:0; display:none; place-items:center; padding:20px; background:rgba(0,0,0,.8); backdrop-filter: blur(8px);
+    }
+    .poster.active{display:grid}
+    .poster-card{
+      width:min(520px,94vw); aspect-ratio:3/4; border-radius:24px; padding:0; position:relative; overflow:hidden;
+      border:1px solid rgba(255,255,255,.1);
+      background:#000;
+      display:flex; flex-direction:column; justify-content:center; align-items:center;
+    }
+    .poster-card img{width:100%; height:100%; object-fit:cover}
+    .close{position:absolute; top:12px; right:12px; width:42px; height:42px; border-radius:999px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.2); color:#fff; font-weight:900; cursor:pointer}
+
+    /* 계좌 고정바 */
+    .dock{position:fixed; left:0; right:0; bottom:0; background:linear-gradient(180deg,rgba(10,14,30,.6),rgba(10,14,30,.9)); border-top:1px solid rgba(255,255,255,.1); backdrop-filter: blur(10px);}
+    .dock > div{max-width:760px; margin:0 auto; padding:14px 16px; display:flex; gap:12px; align-items:center;}
+    .bank{display:flex; flex-direction:column; gap:4px; font-size:13px}
+    .bank strong{font-size:14px}
+    .copy{margin-left:auto}
+    .btn.outline{background:transparent; color:var(--fg); border:1px solid rgba(255,255,255,.3)}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-weight:700}
+
+    /* 러너 가이드 섹션 */
+    .guide{margin-top:40px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:var(--radius); padding:20px;}
+    .guide h2{margin:0 0 12px; font-size:20px; font-weight:800}
+    .guide-item{margin-bottom:10px; font-size:14px; line-height:1.5}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <span class="badge">러너 한정 · 에너지 믹스</span>
+      <h1>러너가 있는 곳이라면, 어디든 간다!</h1>
+      <p class="sub">러닝 후 갈증 해소! 스포티 믹스 칵테일</p>
+    </header>
+
+    <section class="grid" aria-label="메뉴">
+      <!-- 얼파박 -->
+      <article class="card">
+        <h3>얼파박</h3>
+        <div class="tag">얼음 + 파워에이드 + 박카스</div>
+        <p class="ing">기력 회복에 딱! 시원한 블루 에너지</p>
+        <button class="btn" onclick="openPoster('poster1.png')">포스터 열기</button>
+      </article>
+
+      <!-- 얼박사 -->
+      <article class="card">
+        <h3>얼박사</h3>
+        <div class="tag">얼음 + 박카스 + 사이다</div>
+        <p class="ing">톡 쏘는 청량감으로 피로 싹!</p>
+        <button class="btn" onclick="openPoster('poster2.png')">포스터 열기</button>
+      </article>
+    </section>
+
+    <!-- 러너 가이드 섹션 -->
+    <section class="guide">
+      <h2>러닝 후 가이드 🏃‍♂️</h2>
+      <div class="guide-item">💧 <strong>수분 보충</strong>: 땀으로 잃은 수분·전해질 꼭 보충하기</div>
+      <div class="guide-item">⚡ <strong>에너지/영양 정보</strong>: 전해질 회복, 카페인 부스트, 탄산 청량감</div>
+      <div class="guide-item">⏱️ <strong>추천 타이밍</strong>: 러닝 직후 10분 이내 섭취 시 효과 극대화</div>
+    </section>
+  </div>
+
+  <!-- Poster Modal -->
+  <div id="poster" class="poster" role="dialog" aria-modal="true" aria-label="포스터">
+    <div class="poster-card">
+      <button class="close" aria-label="닫기" onclick="closePoster()">✕</button>
+      <img id="posterImg" src="" alt="음료 포스터" />
+    </div>
+  </div>
+
+  <!-- 계좌 고정 바 -->
+  <div class="dock">
+    <div>
+      <div class="bank">
+        <strong>계좌번호</strong>
+        <span class="mono" id="acct" contenteditable="true" spellcheck="false">3333349082889</span>
+      </div>
+      <div class="bank">
+        <strong>이름</strong>
+        <span class="mono" id="name" contenteditable="true" spellcheck="false">오현경</span>
+      </div>
+      <div class="copy">
+        <button class="btn outline" onclick="copyAll()">계좌·이름 복사</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const poster = document.getElementById('poster');
+    const posterImg = document.getElementById('posterImg');
+
+    function openPoster(src){
+      posterImg.src = src;
+      poster.classList.add('active');
+      document.body.style.overflow='hidden';
+    }
+
+    function closePoster(){
+      poster.classList.remove('active');
+      posterImg.src = '';
+      document.body.style.overflow='';
+    }
+
+    poster.addEventListener('click', (e)=>{ if(e.target===poster) closePoster(); });
+
+    async function copyAll(){
+      const acct = document.getElementById('acct').innerText.trim();
+      const who = document.getElementById('name').innerText.trim();
+      const txt = `계좌번호: ${acct} / 이름: ${who}`;
+      try{ await navigator.clipboard.writeText(txt); alert('복사 완료!'); }
+      catch{ alert('복사에 실패했어요. 길게 눌러 선택 후 복사해주세요.'); }
+    }
+  </script>
+</body>
+</html>
